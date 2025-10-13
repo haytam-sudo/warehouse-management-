@@ -2,6 +2,8 @@
 DROP TABLE IF EXISTS items_commander;
 DROP TABLE IF EXISTS commands;
 DROP TABLE IF EXISTS item;
+DROP TABLE IF EXISTS warehouse ;
+
 
 -- Create table for items
 
@@ -9,8 +11,8 @@ CREATE TABLE warehouse (
     warehouse_name VARCHAR(40) PRIMARY KEY,
     location VARCHAR(40),
     phone VARCHAR(20),
-    email VARCHAR(20),
-)
+    email VARCHAR(50)
+);
 CREATE TABLE item (
     item_id VARCHAR(20) PRIMARY KEY,
     item_name VARCHAR(50) NOT NULL,
@@ -42,7 +44,7 @@ ALTER TABLE items_commander
     ADD CONSTRAINT fk_command
         FOREIGN KEY (items_commander_id) REFERENCES commands(command_id);
 ALTER TABLE item 
-    ADD CONSTRAINT warehouse_name_fk 
+    ADD CONSTRAINT fk_warehouse_name 
         FOREIGN KEY (warehouse_name) REFERENCES warehouse(warehouse_name) ;
 
 -- Create a role 
@@ -52,6 +54,7 @@ CREATE ROLE IF NOT EXISTS chef;
 GRANT SELECT, INSERT, UPDATE, DELETE ON item TO chef;
 GRANT SELECT, INSERT, UPDATE, DELETE ON commands TO chef;
 GRANT SELECT, INSERT, UPDATE, DELETE ON items_commander TO chef;
+GRANT SELECT, INSERT, UPDATE, DELETE ON warehouse TO chef;
 
 
 -- GRANT chef TO 'username'@'localhost';

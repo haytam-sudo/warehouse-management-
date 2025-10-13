@@ -4,11 +4,19 @@ DROP TABLE IF EXISTS commands;
 DROP TABLE IF EXISTS item;
 
 -- Create table for items
+
+CREATE TABLE warehouse (
+    warehouse_name VARCHAR(40) PRIMARY KEY,
+    location VARCHAR(40),
+    phone VARCHAR(20),
+    email VARCHAR(20),
+)
 CREATE TABLE item (
     item_id VARCHAR(20) PRIMARY KEY,
     item_name VARCHAR(50) NOT NULL,
     quantity INT NOT NULL CHECK (quantity >= 0),
-    location VARCHAR(50),
+    position VARCHAR(50),
+    warehouse_name VARCHAR(40),
     prix DECIMAL(10,2) NOT NULL CHECK (prix >= 0)
 );
 
@@ -33,6 +41,9 @@ ALTER TABLE items_commander
         FOREIGN KEY (item_id) REFERENCES item(item_id),
     ADD CONSTRAINT fk_command
         FOREIGN KEY (items_commander_id) REFERENCES commands(command_id);
+ALTER TABLE item 
+    ADD CONSTRAINT warehouse_name_fk 
+        FOREIGN KEY (warehouse_name) REFERENCES warehouse(warehouse_name) ;
 
 -- Create a role 
 CREATE ROLE IF NOT EXISTS chef;

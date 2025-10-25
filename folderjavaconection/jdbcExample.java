@@ -1,23 +1,30 @@
 package folderjavaconection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class jdbcExample {
     public static void main(String[] args) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/ma_base", "root", "Haytam1bilal");
+        String url = "jdbc:mysql://localhost:3306/warehouse_app";
+        String user = "root";
+        String password = "Haytam1bilal";
+        String query = "SELECT * from warehouse";
 
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM etudiants");
+        try (Connection con = DriverManager.getConnection(url, user, password);
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query)) { // try with ressources to close the resources after we finish
 
+            List<String> warehouses = new ArrayList<>();
             while (rs.next()) {
-                System.out.println(rs.getString("nom"));
+                String line = rs.getString("warehouse_name") + " | " +
+                        rs.getString("location") + " | " +
+                        rs.getString("phone") + " | " +
+                        rs.getString("email");
+                warehouses.add(line + "\n");
             }
-
-            con.close();
-        } catch (Exception e) {
+            System.out.println(warehouses);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

@@ -1,0 +1,1 @@
+add get_item_pric(item_name ) to jdbc it goes to the database and gets the item price 

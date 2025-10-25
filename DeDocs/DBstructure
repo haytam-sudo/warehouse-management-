@@ -1,0 +1,41 @@
+what we want to implement 
+
+commands
++------------+---------------+------+-----+-----------+-------------------+
+| Field      | Type          | Null | Key | Default   | Extra             |
++------------+---------------+------+-----+-----------+-------------------+
+| command_id | varchar(30)   | NO   | PRI | NULL      |                   |
+| prix_total | decimal(10,2) | NO   |     | NULL      |                   |
+| order_date | date          | YES  |     | curdate() | DEFAULT_GENERATED |
++------------+---------------+------+-----+-----------+-------------------+
+items
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| item_id        | varchar(20)   | NO   | PRI | NULL    |       |
+| item_name      | varchar(50)   | NO   |     | NULL    |       |
+| quantity       | int           | NO   |     | NULL    |       |
+| position       | varchar(50)   | YES  |     | NULL    |       |
+| warehouse_name | varchar(40)   | YES  | MUL | NULL    |       |
+| prix           | decimal(10,2) | NO   |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+
+items_commmander
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| items_commander_id | varchar(30) | NO   | PRI | NULL    |       |
+| item_id            | varchar(20) | NO   | PRI | NULL    |       |
+| quantity           | int         | NO   |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+
+warehouse
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| warehouse_name | varchar(40) | NO   | PRI | NULL    |       |
+| location       | varchar(40) | YES  |     | NULL    |       |
+| phone          | varchar(20) | YES  |     | NULL    |       |
+| email          | varchar(50) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+

@@ -14,10 +14,8 @@ CREATE TABLE warehouse (
     email VARCHAR(50)
 );
 CREATE TABLE item (
-    item_id VARCHAR(20) PRIMARY KEY,
-    item_name VARCHAR(50) NOT NULL,
+    item_name VARCHAR(50) PRIMARY KEY,
     quantity INT NOT NULL CHECK (quantity >= 0),
-    position VARCHAR(50),
     warehouse_name VARCHAR(40),
     prix DECIMAL(10,2) NOT NULL CHECK (prix >= 0)
 );
@@ -32,15 +30,15 @@ CREATE TABLE commands (
 -- Create table for items_commander (junction table)
 CREATE TABLE items_commander (
     items_commander_id VARCHAR(30) NOT NULL,
-    item_id VARCHAR(20) NOT NULL,
+    item_name VARCHAR(20) NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
-    PRIMARY KEY (items_commander_id, item_id)
+    PRIMARY KEY (items_commander_id, item_name)
 );
 
 -- Add foreign keys AFTER table creation
 ALTER TABLE items_commander
     ADD CONSTRAINT fk_item
-        FOREIGN KEY (item_id) REFERENCES item(item_id),
+        FOREIGN KEY (item_name) REFERENCES item(item_name),
     ADD CONSTRAINT fk_command
         FOREIGN KEY (items_commander_id) REFERENCES commands(command_id);
 ALTER TABLE item 
@@ -57,4 +55,3 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON items_commander TO chef;
 GRANT SELECT, INSERT, UPDATE, DELETE ON warehouse TO chef;
 
 
--- GRANT chef TO 'username'@'localhost';

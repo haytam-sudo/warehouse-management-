@@ -1,0 +1,70 @@
+==CLasses 
+
+1. Order (Command)
+
+   * Attributes: command_id, prix_total, order_date
+
+2. Item
+
+   * Attributes: item_id, item_name, quantity, position, warehouse_name, prix
+
+3. OrderItem (Items_Commander)
+
+   * Attributes: items_commander_id, item_id, quantity
+
+4. Warehouse
+
+   * Attributes: warehouse_name, location, phone, email
+
+
+User Operations (CRUD):
+
+Order:
+
+* Create a new order
+* View order details
+* Update order (change items or quantities)
+* Delete order
+
+Item:
+
+* Add new item
+* Update item information (name, price, quantity, position)
+* Delete item
+* View item details / search items
+
+OrderItem:
+
+* Add item to order
+* Remove item from order
+* Update quantity of item in order
+* View all items in a specific order
+
+Warehouse:
+
+* Add warehouse
+* Update warehouse info (location, contact)
+* Delete warehouse
+* View warehouse details
+
+---
+
+Associations:
+
+* Order -> OrderItem: 1 order has many order items
+* Item -> OrderItem: 1 item can be in many orders
+* Item -> Warehouse: An item is stored in a warehouse
+
+---
+
+Use Case Actors:
+
+* User (system operator or client)
+
+Use Cases:
+
+* Manage Orders: Create, Update, Delete, View
+* Manage Items: Add, Update, Delete, View/Search
+* Manage Order Items: Add to Order, Update Quantity, Remove from Order
+* Manage Warehouses: Add, Update Info, Delete, View
+
